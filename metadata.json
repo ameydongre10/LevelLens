@@ -1,0 +1,8 @@
+{
+  "name": "LevelLens Teacher App",
+  "description": "Offline-first mobile diagnostic, grouping, and live skill tagging tool for primary school teachers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
