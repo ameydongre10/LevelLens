@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
   workflow_dispatch:
 
 permissions:
@@ -32,8 +31,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: TypeScript validation
+        run: npx tsc --noEmit
+
       - name: Build site
         run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "ERROR: dist/index.html not found after build!"
+            exit 1
+          fi
+          echo "Build verification passed: dist/index.html exists"
+          echo "--- dist contents ---"
+          ls -la dist/
+          echo "--- Checking asset paths in index.html ---"
+          cat dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
